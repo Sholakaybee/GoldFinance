@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 app.app_context().push()
 
-
+# this is the class model for the database
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True)
@@ -19,7 +19,7 @@ class User(db.Model):
     phone = db.Column(db.String(20))
     
 
-
+# these are the routes for the site
 @app.route("/")
 @app.route("/home")
 def home():
@@ -37,6 +37,7 @@ def products():
 def dashboard():
     return render_template('dashboard.html')
 
+# these is the flask registration form authentication
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = Registrationform()
@@ -48,6 +49,7 @@ def register():
         # return '<h1> new user has been created </h1>'
     return render_template('register.html', form=form)
 
+# these is the flask login form authentication
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form =  Loginform()

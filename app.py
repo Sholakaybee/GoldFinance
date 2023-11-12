@@ -25,9 +25,17 @@ class User(db.Model):
 def home():
     return render_template('home.html')
 
-@app.route("/products.html")
+@app.route("/about")
+def about():
+    return render_template('about.html')
+
+@app.route("/products")
 def products():
     return render_template('products.html')
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template('dashboard.html')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -47,7 +55,7 @@ def login():
         user = User.query.filter(text("email = :email")).params(email=form.email.data).first()        
         if user:
             if user.password == form.password.data:
-                return redirect(url_for('products'))
+                return redirect(url_for('dashboard'))
             else:
                 return '<h1> incorrect password, please try again! </h1>'
         else:
